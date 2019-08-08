@@ -1,0 +1,216 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- SITE TITTLE -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event kenya</title>
+  
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  
+  <!-- PLUGINS CSS STYLE -->
+  <link rel="stylesheet" href="{% static '/events_main/plugins/jquery-ui/jquery-ui.min.css' %}">
+
+  <!-- CUSTOM CSS -->
+  <link rel="stylesheet" href="{% static '/events_main/css/style.css' %}">
+  
+  <!-- Bootstrap 
+  <link href="{% static 'events_main/plugins/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+  -->
+
+  <!-- Font Awesome -->
+  <link href="{% static 'events_main/plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+
+
+  <!-- Owl Carousel -->
+  <link href="{% static 'events_main/plugins/slick-carousel/slick/slick.css' %}" rel="stylesheet">
+  <link href="{% static 'events_main/plugins/slick-carousel/slick/slick-theme.css' %}" rel="stylesheet">
+
+
+
+  <!-- Fancy Box -->
+  <link href="{% static 'events_main/plugins/fancybox/jquery.fancybox.pack.css' %}" rel="stylesheet">
+  <link href="{% static 'events_main/plugins/jquery-nice-select/css/nice-select.css' %}" rel="stylesheet">
+  <link href="{% static 'events_main/plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css' %}" rel="stylesheet">
+
+
+  <!-- FAVICON -->
+  <link href="{% static 'events_main/img/favicon.png' %}" rel="shortcut icon">
+
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+  <link rel="stylesheet" href="{% static 'events_main/login_signup/css/styles.css' %}">
+
+
+</head>
+
+<body class="body-wrapper">
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <nav class="navbar navbar-expand-lg  navigation">
+          <a class="navbar-brand" href="{% url 'events-home' %}">
+            <img src="{% static 'events_main/images/logo.png' %}" alt="">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto main-nav ">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'events-home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}">Dashboard</a>
+              </li>
+              <li class="nav-item dropdown dropdown-slide">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Pages <span><i class=""></i></span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'post-create' %}">Create an event</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ml-auto mt-10">
+              <li class="nav-item">
+                 {% if user.is_authenticated %}
+                 <a class="nav-link add-button" href="{% url 'profile' %}"><i class=""></i>{{user.username}}</a>
+                 <a class="nav-link add-button" href="{% url 'logout' %}"><i class=""></i>Logout</a>
+                  {% else %}
+                   <a class="nav-link login-button" href="{% url 'login' %}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link add-button" href="{% url 'register' %}"><i class=""></i>Sign up</a>
+                  {% endif %}
+               
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% block content %}{% endblock %}
+
+
+
+<!--============================
+=            Footer            =
+=============================-->
+
+<footer class="footer section section-sm">
+  <!-- Container Start -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-7 offset-md-1 offset-lg-0">
+        <!-- About -->
+        <div class="block about">
+          <!-- footer logo -->
+          <img src="{% static 'events_main/images/logo-footer.png' %}" alt="">
+          <!-- description -->
+          <p class="alt-color">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+      </div>
+      <!-- Link list -->
+      <div class="col-lg-2 offset-lg-1 col-md-3">
+        <div class="block">
+          <h4>Site Pages</h4>
+          <ul>
+            <li><a href="#">Boston</a></li>
+            <li><a href="#">How It works</a></li>
+            <li><a href="#">Deals & Coupons</a></li>
+            <li><a href="#">Articls & Tips</a></li>
+            <li><a href="#">Terms of Services</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Link list -->
+      <div class="col-lg-2 col-md-3 offset-md-1 offset-lg-0">
+        <div class="block">
+          <h4>Admin Pages</h4>
+          <ul>
+            <li><a href="#">Boston</a></li>
+            <li><a href="#">How It works</a></li>
+            <li><a href="#">Deals & Coupons</a></li>
+            <li><a href="#">Articls & Tips</a></li>
+            <li><a href="#">Terms of Services</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Promotion -->
+      <div class="col-lg-4 col-md-7">
+        <!-- App promotion -->
+        <div class="block-2 app-promotion">
+          <a href="">
+            <!-- Icon -->
+            <img src="{% static 'events_main/images/footer/phone-icon.png' %}" alt="mobile-icon">
+          </a>
+          <p>Kenya's best event manager</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Container End -->
+</footer>
+<!-- Footer Bottom -->
+
+<footer class="footer-bottom">
+    <!-- Container Start -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-12">
+          <!-- Copyright -->
+          <div class="copyright">
+            <p>Copyright © 2019. All Rights Reserved</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-12">
+          <!-- Social Icons -->
+          <ul class="social-media-icons text-right">
+              <li><a class="fa fa-facebook" href=""></a></li>
+              <li><a class="fa fa-twitter" href=""></a></li>
+              <li><a class="fa fa-pinterest-p" href=""></a></li>
+              <li><a class="fa fa-vimeo" href=""></a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Container End -->
+    <!-- To Top -->
+    <div class="top-to">
+      <a id="top" class="" href=""><i class="fa fa-angle-up"></i></a>
+    </div>
+</footer>
+
+  <!-- JAVASCRIPTS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ 
+
+  <script src="{% static 'events_main/plugins/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'events_main/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+  <script src="{% static 'events_main/plugins/tether/js/tether.min.js' %}"></script>
+  <script src="{% static 'events_main/plugins/raty/jquery.raty-fa.js' %}"></script>
+  <script src="{% static 'events_main/plugins/bootstrap/dist/js/popper.min.js' %}"></script>
+  <script src="{% static 'events_main/plugins/bootstrap/dist/js/bootstrap.min' %}.js"></script>
+  <script src="{% static 'events_main/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js' %}"></script>
+  <script src="{% static 'events_main/plugins/slick-carousel/slick/slick.min.js' %}"></script>
+  <script src="{% static 'events_main/plugins/jquery-nice-select/js/jquery.nice-select.min.js' %}"></script>
+  <script src="{% static 'events_main/plugins/fancybox/jquery.fancybox.pack.js' %}"></script>
+  <script src="{% static 'events_main/plugins/smoothscroll/SmoothScroll.min.js' %}"></script>
+  <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>-->
+  <script src="{% static 'events_main/js/scripts.js' %}"></script>
+  </body>
+</html>
