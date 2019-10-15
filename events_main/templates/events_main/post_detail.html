@@ -1,21 +1,63 @@
-{% extends "events_main/base.html"%}
+{% extends "events_main/base.html" %}
 {% block content %}
-  <article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
-        <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
-        <img src="{{ post.image.url }}" alt="..." class="img-thumbnail">
-        {% if object.author == user %}
-          <div>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
-            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
-          </div>
-        {% endif %}
-      </div>
-      <h2 class="article-title">{{ object.title }}</h2>
-      <p class="article-content">{{ object.content }}</p>
-    </div>
-  </article>
+{% load static %}
+	<section class="single_product_details_area d-flex align-items-center">
+
+        <!-- Single Product Thumb -->
+        <div class="single_product_thumb clearfix">
+            <div class="product_thumbnail_slides owl-carousel">
+                <img class = "heightlimit" src="{{ post.image.url }}" alt="">
+                <img class = "heightlimit"src="{{ post.image.url }}" alt="">
+                <img class = "heightlimit"src="{{ post.image.url }}" alt="">
+            </div>
+        </div>
+
+        <!-- Single Product Description -->
+        <div class="single_product_desc clearfix">
+            <span>{{ post.category }}</span>
+            <a href="cart.html">
+                <h2>{{ post.events }}</h2>
+                <p class="product-price"> {{ post.date_posted|date:"d F, Y " }}</p>
+            </a>
+            {% if post.discount_price %}
+             <p class="product-price"><span class="old-price">Kshs: {{ post.price }}</span>Kshs: {{ post.discount_price }}</p>
+            {% else %}
+            <p class="product-price">Kshs:{{post.price}}</p>
+            {% endif %}
+           
+            <p class="product-desc">{{ post.content }}</p>
+
+            <!-- Form -->
+            <div class="cart-form clearfix" >
+
+            	{% if object.author == user %}
+                <div class="cart-fav-box d-flex align-items-center">
+                
+                <a href="{% url 'post-update' object.id %}" class="btn btn-success btn-lg">Update</a>
+                <!-- Favourite -->
+                <div class="product-favourite ml-4">
+                    <a href="{% url 'post-delete' object.id %}" class="btn btn-danger btn-lg">Delete</a>
+                </div>
+                
+                </div>
+                {% else %}
+                <div class="cart-fav-box d-flex align-items-center">
+                    <!-- Cart -->
+                    <a href="{% url 'add-to-cart' object.id %}" class="btn essence-btn">Add to cart</button></a>
+                    <!-- Favourite -->
+                    <div class="product-favourite ml-4">
+                    	<!--<a href="{% url 'remove-from-cart' object.id %}" class="btn essence-btn">Remove from cart</button></a>-->
+                        <a href="#" class="favme fa fa-heart ml-4"></a>
+                    </div>
+                </div>
+              
+                {% endif %}
+                
+               
+                <!-- Cart & Favourite Box -->
+                
+            </form>
+        </div>
+    </section>
 {% endblock content %}
+      

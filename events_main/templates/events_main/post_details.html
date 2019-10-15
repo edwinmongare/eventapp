@@ -1,0 +1,59 @@
+{% extends "events_main/base.html" %}
+{% block content %}
+      
+      <br></br>
+      <section class="single_product_details_area d-flex align-items-center"> 
+          <!-- Single Product Thumb -->
+          <div class="single_product_thumb clearfix">
+            <img src="{{ post.image.url }}" alt="">
+          </div>
+          <div class="single_product_desc clearfix">
+              <span>{{ post.category }},</span>
+               <h3>{{ post.events }}</h3>
+              <h6 class="card-title"><a href="{% url 'user-posts' post.author.username %}">posted by: {{ post.author }} </a>
+              </h6>
+              
+
+              {% if post.discount_price %}
+                <span class= "mr-1">
+                 <del><div class="d-inline p-2 bg-primary text-white align-middle">price: {{ post.price }}</div></del>
+                </span>
+                <span>
+                  <div class="d-inline p-2 bg-primary text-white align-middle sideways">Discount Price: {{ post.discount_price }}</div>
+                </span>
+                {% else %}
+                <span><div class="d-inline p-2 bg-primary text-white align-middle">price: {{ post.price }}</div></span>
+              {% endif %}
+              <p class="product-price"> {{ post.date_posted|date:"d F, Y " }}</p>
+              <p class="product-desc">{{ post.content }}</p>
+
+              
+              {% if object.author == user %}
+                <div class="cart-fav-box d-flex align-items-center">
+                
+                <a href="{% url 'post-update' object.id %}" class="btn btn-success">Update</a>
+                <!-- Favourite -->
+                <div class="product-favourite ml-4">
+                    <a href="{% url 'post-delete' object.id %}" class="btn btn-danger">Delete</a>
+                </div>
+                
+                </div>
+                {% else %}
+                 <div class="cart-fav-box d-flex align-items-center">
+                  <a href="{% url 'post-checkout' object.id %}" class="btn btn-success">Buy Tickets now</a>
+                    <div class="product-favourite ml-4">
+                      <a href="{% url 'add-to-cart' object.id %}" class="btn btn-danger">Add to cart</a>
+                    </div>
+
+                    <div class="product-favourite ml-4">
+                      <a href="{% url 'remove-from-cart' object.id %}" class="btn btn-danger">remove from cart</a>
+                    </div>
+                </div>
+
+              {% endif %}
+          </div>
+
+      </section>
+
+
+{% endblock content %}

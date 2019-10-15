@@ -1,0 +1,84 @@
+{% extends "events_main/base.html" %}
+{% block content %}
+ <section class="popular-deals sections bg-gray">
+    <div class="hero-area bg-7 text-center overly">
+      <!-- Container Start -->
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- Header Contetnt -->
+              <div class="content-block">
+                <h1>Events posted by {{ view.kwargs.username }} ({{ page_obj.paginator.count }}) </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+    <!-- Container End -->
+  </div>  
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div id="events_row" class="row ">
+                <!-- offer 01 -->
+                {% for post in posts %}
+                <div class="col-sm-12 col-lg-4">
+                    <!-- product card -->
+                    <div class="product-item bg-light">
+                        <div class="card">
+                            <div class="thumb-content">
+                                <!-- <div class="price">$200</div> -->
+                                <a href="">
+                                    <img class="card-img-top img-fluid" src="{{ post.image.url }}" alt="Card image cap">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                              
+                                <h4 class="card-title"><a href="{% url 'post-detail' post.id %}">{{ post.events }}</a></h4>
+                                <ul class="list-inline product-meta">
+                                    <li class="list-inline-item">
+                                        <a href=""><i class="fa fa-calendar"></i>{{ post.date_posted|date:"d F, Y " }}</a>
+                                    </li>
+                                </ul>
+                                <p class="card-text">{{ post.content }}</p>
+                                <h6 class="card-title"><a href="{% url 'user-posts' post.author.username %}">posted by: {{ post.author }}</a></h6>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+      </div>
+  </section>
+
+
+  {% if is_paginated %}
+      <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+    </ul>
+
+    {% endif %}
+
+{% endblock content %}

@@ -1,0 +1,83 @@
+{% extends "events_main/base.html"%}
+{% load static %}
+{% block content %}
+	<main>
+	    <div class="container">
+		    <div class="table-responsive text-nowrap">
+			    <h2>Order Summary</h2>
+				    <table class="table">
+				        <thead>
+					        <tr>
+					        	<th scope="col">#</th>
+					            <th scope="col">Details</th>
+					            
+					            <th scope="col">Price</th>
+					            <th scope="col">Quantity</th>
+					            <th scope="col">Total Item Price</th>
+					        </tr>
+				        </thead>
+				        <tbody>
+					        {%for object in objects %}
+						        {% for order_post in object.posts.all %}
+							        <tr>
+							            <th scope="row">{{ forloop.counter }}</th>
+							            <td><img src="{{ order_post.post.image.url }}" alt="..." class="img-thumbnail"> {{ order_post.post.events }}</td>
+							            <td>{{ order_post.post.price }}</td>
+							            
+							            <td>
+							                <a href="{% url 'remove_single_item_from_cart' order_post.post.id %}"><i class="fa fa-minus mr-2" aria-hidden="true"></i></a>
+
+							                {{ order_post.quantity }}
+							                <a href="{% url 'add_single_item_to_cart' order_post.post.id %}"><i class="fa fa-plus ml-2" aria-hidden="true"></i></a>
+
+							                
+							               
+							            </td>
+							            
+							            <td>
+							            {% if order_post.post.discount_price %}
+							                kshs {{ order_post.get_total_discount_post_price }}
+							                <span class="badge badge-primary">Saving kshs{{ order_post.get_amount_saved }}</span>
+							            {% else %}
+							                kshs {{ order_post.get_total_post_price }}
+							            {% endif %}
+
+							            <a style='color: red;' href="{% url 'remove-from-cart' order_post.post.id %}">
+							            	<i class="fa fa-trash float-right" aria-hidden="true">{{order_post.post.id}}</i>
+							                <!--<i class="fas fa-trash float-right"></i>-->
+							            </a>
+							            </td>
+							        </tr>
+						        {% empty %}
+						        <tr>
+						            <td colspan='5'>Your cart is empty</td>
+						        </tr>
+						        <tr>
+						            <td colspan="5">
+						            <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
+						            </td>
+						        </tr>
+						        {% endfor %}
+					       
+					        {% if object.get_total %}
+					        <tr>
+					            <td colspan="4"><b>Order Total</b></td>
+					            <td><b>kshs {{ object.get_total }}</b></td>
+					        </tr>
+					        <tr>
+					            <td colspan="5">
+					            <a class='btn btn-warning float-right ml-2' href="{% url 'post-checkout' %}">Proceed to checkout</a>
+					            <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
+					            </td>
+					        </tr>
+					        {% endif %}
+					        {% endfor %}
+					        </tbody>
+				    </table>
+
+	        </div>
+
+	    </div>
+  </main>
+
+{% endblock content %}

@@ -1,298 +1,129 @@
 {% extends "events_main/base.html" %}
+{% block title %}Event kenya{% endblock %}
 {% block content %}
 
-	<section class="hero-area bg-1 text-center overly">
-		<!-- Container Start -->
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<!-- Header Contetnt -->
-					<div class="content-block">
-						<h1>Welcome to events kenya </h1>
-						<p>Get tickets to your favourite events or create your own events and sell your tickets with us today</p>
-						<div class="short-popular-category-list text-center">
-							<h2>Event categories</h2>
-							<ul class="list-inline">
-								<li class="list-inline-item">
-									<a href=""><i class="fa fa-bed"></i> Technology</a></li>
-								<li class="list-inline-item">
-									<a href=""><i class="fa fa-grav"></i> Health</a>
-								</li>
-								<li class="list-inline-item">
-									<a href=""><i class="fa fa-car"></i> Meet ups</a>
-								</li>
-								<li class="list-inline-item">
-									<a href=""><i class="fa fa-cutlery"></i> Cooking</a>
-								</li>
-								<li class="list-inline-item">
-									<a href=""><i class="fa fa-coffee"></i> Educational</a>
-								</li>
-							</ul>
-						</div>
-						
-					</div>
-					<!-- Advance Search -->
-					<div class="advance-search">
-						<form action="#">
-							<div class="row">
-								<!-- Store Search -->
-								<div class="col-lg-6 col-md-12">
-									<div class="block d-flex" name="events_search">
-										<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="search" placeholder="Search for events here">
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-12">
-									<div class="block d-flex">
-										
-										<!-- Search Button -->
-										<button class="btn btn-main">SEARCH</button>
-									</div>
-								</div>
-							</div>
-						</form>
-						
-					</div>
-					
-				</div>
-			</div>
-		</div>
-		<!-- Container End -->
-	</section>	
-    
-	    
+{% load static %}
 
-	<!--===================================
-	=            Client Slider            =
-	====================================-->
-
-
-	<!--===========================================
-	=            Popular deals section            =
-	============================================-->
-	
-	<section class="popular-deals section bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-title">
-                        <h2>Events</h2>
-                        <p></p>
+{% block css %}
+    <!-- Core Style CSS -->
+   
+{% endblock %}
+	<section class="welcome_area bg-img background-overlay" style="background-image: url({% static 'events_main/main/img/bg-img/bg-1.png' %});">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="hero-content">
+                        <!--<h6>asoss</h6>-->
+                        <!--<h2>New Collection</h2>-->
+                        <!--<a href="#" class="btn essence-btn">view collection</a>-->
                     </div>
                 </div>
             </div>
-            <div id="events_row" class="row ">
-                <!-- offer 01 -->
-                {% for post in posts %}
-                <div class="col-sm-12 col-lg-4">
-                    <!-- product card -->
-                    <div class="product-item bg-light">
-                        <div class="card">
-                            <div class="thumb-content">
-                                <!-- <div class="price">$200</div> -->
-                                <a href="">
-                                    <img class="card-img-top img-fluid" src="{{ post.image.url }}" alt="Card image cap">
-                                </a>
-                            </div>
-                            <div class="card-body">
-                            	
-                                <h4 class="card-title"><a href="{% url 'post-detail' post.id %}">{{ post.events }}</a></h4>
-                                <ul class="list-inline product-meta">
-                                    <li class="list-inline-item">
-                                        <a href=""><i class="fa fa-calendar"></i>{{ post.date_posted|date:"d F, Y " }}</a>
-                                    </li>
-                                </ul>
-                                <p class="card-text">{{ post.content }}</p>
-                                <h6 class="card-title"><a href="{% url 'user-posts' post.author.username %}">posted by: {{ post.author }}</a></h6>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                {% endfor %}
-                
-
-
-
-                
-
-            </div>
-
-            {% if is_paginated %}
-            
-             <ul class="pagination justify-content-center">
-			      {% if page_obj.has_previous %}
-			        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-			        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-			      {% endif %}
-
-			      {% for num in page_obj.paginator.page_range %}
-			        {% if page_obj.number == num %}
-			          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-			        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-			          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
-			        {% endif %}
-			      {% endfor %}
-
-			      {% if page_obj.has_next %}
-			        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-			        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-			      {% endif %}
-
-			{% endif %}
-		    </ul>
         </div>
     </section>
 
-	
+    <section class="new_arrivals_area section-padding-80 clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center">
+                        <h2>Featured events</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="container">
+        	
+            <div class="row">
+                <div class="col-12">
+                    <div class="popular-products-slides owl-carousel">
+                        <!-- Single Product -->
+                        {% for post in posts %}
 
-	<!--==========================================
-	=            All Category Section            =
-	===========================================-->
+                        <div class="single-product-wrapper">
+                            <!-- Product Image -->
+                            <div class="product-img">
+                                <img src="{{ post.image.url }}" alt="">
+                                <!-- Hover Thumb -->
+                                <a href="{% url 'post-detail' post.id %}"><img class="hover-img" src="{{ post.image.url }}" alt=""></a>
 
-	<section class=" section">
-		<!-- Container Start -->
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<!-- Section title -->
-					<div class="section-title">
-						<h2>All Categories</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, provident!</p>
-					</div>
-					<div class="row">
-						<!-- Category list -->
-						<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-							<div class="category-block">
-								<div class="header">
-									<i class="fa fa-laptop icon-bg-1"></i> 
-									<h4>Electronics</h4>
-								</div>
-								<ul class="category-list" >
-									<li><a href="category.html">Laptops <span>93</span></a></li>
-									<li><a href="category.html">Iphone <span>233</span></a></li>
-									<li><a href="category.html">Microsoft  <span>183</span></a></li>
-									<li><a href="category.html">Monitors <span>343</span></a></li>
-								</ul>
-							</div>
-						</div> <!-- /Category List -->
-						<!-- Category list -->
-						<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-							<div class="category-block">
-								<div class="header">
-									<i class="fa fa-apple icon-bg-2"></i> 
-									<h4>Restaurants</h4>
-								</div>
-								<ul class="category-list" >
-									<li><a href="category.html">Cafe <span>393</span></a></li>
-									<li><a href="category.html">Fast food <span>23</span></a></li>
-									<li><a href="category.html">Restaurants  <span>13</span></a></li>
-									<li><a href="category.html">Food Track<span>43</span></a></li>
-								</ul>
-							</div>
-						</div> <!-- /Category List -->
-						<!-- Category list -->
-						<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-							<div class="category-block">
-								<div class="header">
-									<i class="fa fa-home icon-bg-3"></i> 
-									<h4>Real Estate</h4>
-								</div>
-								<ul class="category-list" >
-									<li><a href="category.html">Farms <span>93</span></a></li>
-									<li><a href="category.html">Gym <span>23</span></a></li>
-									<li><a href="category.html">Hospitals  <span>83</span></a></li>
-									<li><a href="category.html">Parolurs <span>33</span></a></li>
-								</ul>
-							</div>
-						</div> <!-- /Category List -->
-						<!-- Category list -->
-						<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-							<div class="category-block">
-								<div class="header">
-									<i class="fa fa-shopping-basket icon-bg-4"></i> 
-									<h4>Shoppings</h4>
-								</div>
-								<ul class="category-list" >
-									<li><a href="category.html">Mens Wears <span>53</span></a></li>
-									<li><a href="category.html">Accessories <span>212</span></a></li>
-									<li><a href="category.html">Kids Wears <span>133</span></a></li>
-									<li><a href="category.html">It & Software <span>143</span></a></li>
-								</ul>
-							</div>
-						</div> <!-- /Category List -->
-						<!-- Category list -->
-						<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-							<div class="category-block">
-								<div class="header">
-									<i class="fa fa-briefcase icon-bg-5"></i> 
-									<h4>Jobs</h4>
-								</div>
-								<ul class="category-list" >
-									<li><a href="category.html">It Jobs <span>93</span></a></li>
-									<li><a href="category.html">Cleaning & Washing <span>233</span></a></li>
-									<li><a href="category.html">Management  <span>183</span></a></li>
-									<li><a href="category.html">Voluntary Works <span>343</span></a></li>
-								</ul>
-							</div>
-						</div> <!-- /Category List -->
-						<!-- Category list -->
-						<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-							<div class="category-block">
-								<div class="header">
-									<i class="fa fa-car icon-bg-6"></i> 
-									<h4>Vehicles</h4>
-								</div>
-								<ul class="category-list" >
-									<li><a href="category.html">Bus <span>193</span></a></li>
-									<li><a href="category.html">Cars <span>23</span></a></li>
-									<li><a href="category.html">Motobike  <span>33</span></a></li>
-									<li><a href="category.html">Rent a car <span>73</span></a></li>
-								</ul>
-							</div>
-						</div> <!-- /Category List -->
-						<!-- Category list -->
-						<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-							<div class="category-block">
-								<div class="header">
-									<i class="fa fa-paw icon-bg-7"></i> 
-									<h4>Pets</h4>
-								</div>
-								<ul class="category-list" >
-									<li><a href="category.html">Cats <span>65</span></a></li>
-									<li><a href="category.html">Dogs <span>23</span></a></li>
-									<li><a href="category.html">Birds  <span>113</span></a></li>
-									<li><a href="category.html">Others <span>43</span></a></li>
-								</ul>
-							</div>
-						</div> <!-- /Category List -->
-						<!-- Category list -->
-						<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-							<div class="category-block">
-								<div class="header">
-									<i class="fa fa-laptop icon-bg-8"></i> 
-									<h4>Services</h4>
-								</div>
-								<ul class="category-list" >
-									<li><a href="category.html">Cleaning <span>93</span></a></li>
-									<li><a href="category.html">Car Washing <span>233</span></a></li>
-									<li><a href="category.html">Clothing  <span>183</span></a></li>
-									<li><a href="category.html">Business <span>343</span></a></li>
-								</ul>
-							</div>
-						</div> <!-- /Category List -->
-						
-						
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Container End -->
-	</section>
+                                <!-- Product Badge -->
+                                <div class="product-badge new-badge">
+                                    <span>New</span>
+                                </div>
+
+                                <!-- Favourite -->
+                                <div class="product-favourite">
+                                    <a href="#" class="favme fa fa-heart"></a>
+                                </div>
+                            </div>
+                            <!-- Product Description -->
+                            <div class="product-description">
+                                <span>{{post.category}}</span>
+                                <a href="{% url 'user-posts' post.author.username %}">
+                                    <h6>{{ post.events }}</h6>
+                                </a>
+                                <p class="product-price">kshs: {{ post.price }}</p>
+
+                                <!-- Hover Content -->
+                                <div class="hover-content">
+                                    <!-- Add to Cart -->
+                                    <div class="add-to-cart-btn">
+                                        <a href="{% url 'add-to-cart' post.id %}" class="btn essence-btn">Add to Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+      
+    </section>
+      <div class="top_catagory_area section-padding-80 clearfix">
+          </div>
+          <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center">
+                        <h2>Featured categories</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Single Catagory -->
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <a href=""><div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url({% static 'events_main/main/img/bg-img/bg-2.png' %});">
+                        <div class="catagory-content">
+                            <a href="#">Photography</a>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <!-- Single Catagory -->
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url({% static 'events_main/main/img/bg-img/bg-3.png' %});">
+                        <div class="catagory-content">
+                            <a href="#">Meet ups</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single Catagory -->
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url({% static 'events_main/main/img/bg-img/bg-4.png' %});">
+                        <div class="catagory-content">
+                            <a href="#">corporate meetings</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <div class="top_catagory_area section-padding-80 clearfix">
+          </div>
 	    
 {% endblock content %}
-
-	<!--===============================
-	=            Hero Area            =
-	================================-->

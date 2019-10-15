@@ -1,0 +1,33 @@
+{% extends "events_main/base.html"%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="main">
+            <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src=""></figure>
+                    </div>
+
+                    <div class="signin-form">
+                        <h2 class="form-title">Please enter the six digit code we sent to your email</h2>
+                        <form method="POST" class="register-form" id="login-form">
+                               {% csrf_token %}
+                               
+                            
+                            <div class="form-group">
+                                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="number" name="otp" class="textinput textInput form-control" id="your_pass" placeholder="enter pin   "/>
+                            </div>
+                            
+                            <div class="form-group form-button">
+                                <input type="submit" name="signin" id="signin" class="btn btn-success form-submit" value="Confirm"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock content %}

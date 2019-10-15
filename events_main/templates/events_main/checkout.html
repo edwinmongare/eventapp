@@ -1,0 +1,94 @@
+{% extends "events_main/base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+  <div class="hero-area bg-7 text-center overly">
+      <!-- Container Start -->
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- Header Contetnt -->
+              <div class="content-block">
+                <h1>Checkout</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>  
+    <div class="checkout_area section-padding-80">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-12 col-md-6">
+                    <div class="checkout_details_area mt-50 clearfix">
+
+                        <div class="cart-page-heading mb-30">
+                            <h5>Billing Address</h5>
+                        </div>
+                       <!--  <form>
+                            {% csrf_token %}
+                            {{form| crispy}}
+                            
+                        </form> -->
+                       
+                        <form action="#" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="first_name">First Name <span>*</span></label>
+                                   <!--  <input type="text" class="form-control" id="first_name" value="" required> -->
+                                   {{ form.First_name }}
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="last_name">Last Name <span>*</span></label>
+                                    <!-- <input type="text" class="form-control" id="last_name" value="" required> -->
+                                    {{ form.Second_name }}
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <label for="email_address">Email Address <span>*</span></label>
+                                   <!--  <input type="email" class="form-control" id="email_address" value=""> -->
+                                   {{ form.email_address }}
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <label for="phone_number">Phone No <span>*</span></label>
+                                   <!--  <input type="number" class="form-control" id="phone_number" min="0" value=""> -->
+                                   {{ form.phone_number }}
+                                   
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <label for="email_address">Payment optiion <span>*</span></label>
+                                   <!--  <input type="email" class="form-control" id="email_address" value=""> -->
+                                   {{ form.payment_option }}
+                                </div>
+                                <!-- <button class="btn btn-primary" type="submit">Order now</button> -->
+                                 <button class="btn essence-btn" type="submit">Place Order</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-5 ml-lg-auto">
+                    <div class="order-details-confirmation">
+
+                        <div class="cart-page-heading">
+                            <h5>Your Order</h5>
+                            <p>The Details</p>
+                        </div>
+
+                        <ul class="order-details-form mb-4">
+                            <li><span>Product</span> <span>Total</span></li>
+                            <li><span>Test event one</span> <span>kshs: 59.90</span></li>
+                            <li><span>Subtotal</span> <span>kshs: 59.90</span></li>
+                            <li><span>Total</span> <span>kshs: 59.90</span></li>
+                        </ul>
+
+                        <div id="accordion" role="tablist" class="mb-4">
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ {% endblock content %}
