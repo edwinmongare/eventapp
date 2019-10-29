@@ -26,8 +26,26 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
+
+            # send_mail(
+            #     'Account creation', 
+            #  f'You have succesfuly registered an account with us, your username is{username}'
+            # 'Testmail <edwinmongare14@gmail.com>', 
+            # ['angelangugi75@gmail.com'],
+            # fail_silently=False,
+            # )
+
+            send_mail(
+                'Account creation',
+                'Test sign up message, username angiengugi143',
+                'Testmail <edwinmongare14@gmail.com',
+                ['angiengugi75@gmail.com'],
+                fail_silently=False,
+            )
             messages.success(request, f'Your account has been created! You can now succesfuly login')
             return redirect('login')
+            
+
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
@@ -54,15 +72,25 @@ def login_user(request):
            #print("s['otp']",  s['otp'] )
             message =f"Kindly use this code to login to your account {otp}"
             print("message", message)
-            
-            send_mail(
 
-                    ' your one time login paswword ',
-                    message, 
-                    'edwinmongare14@gmail.com',
-                    [user.email],
-                    fail_silently=False,
+            send_mail(
+                'your one time login paswword', 
+            message,
+            'Testmail <edwinmongare14@gmail.com>', 
+            [user.email]
+            
+
+                
                 )
+            
+            # send_mail(
+
+            #         ' your one time login paswword ',
+            #         message, 
+            #         'edwinmongare14@gmail.com',
+            #         [user.email],
+            #         fail_silently=False,
+            #     )
                
             #Redirect to a success page.
             return HttpResponseRedirect(reverse('events-otp', args=(the_id,)))
@@ -97,7 +125,7 @@ def otp_login(request, url_id):
 
                 ' loggin activity ',
                 message_login, 
-                'edwinmongare14@gmail.com',
+                'Testmail <edwinmongare14@gmail.com>',
                 [user.email],
                 fail_silently=False,
             )
