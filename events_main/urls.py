@@ -26,6 +26,7 @@ from . import views
 
 
 urlpatterns = [
+    
     #path('', PostListView.as_view(), name='events-home'),
 	path('', PostListView.as_view(), name='events-home'),
     path('user/<str:username>', UserPostListView.as_view(), name='users-profile'),
